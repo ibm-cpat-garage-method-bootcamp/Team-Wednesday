@@ -101,8 +101,6 @@ class TableList extends Component {
 
   render() {
     const data = this.state.data; 
-    console.log('test', this.catalogSorter(data))
-    // data = this.catalogSorter(data);
     
     return (
       <div className="bx--grid pattern-container">
