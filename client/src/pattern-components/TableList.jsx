@@ -14,7 +14,11 @@ import "./patterns.scss";
 
 class TableList extends Component {
   title = 'Catalog';
+<<<<<<< HEAD
   subtitle = 'This is a list for items needed.';
+=======
+  subtitle = 'This list displays your frequently used items.';
+>>>>>>> 59388bc379d77ac151cb9e84368ba03a4bc01504
 
   columns = ['Name', 'Size', 'Comments']; 
 
@@ -100,8 +104,8 @@ class TableList extends Component {
   };
 
   render() {
-    const data = this.state.data; 
-    console.log('test', this.catalogSorter(data))
+    const data = this.catalogSorter(this.state.data); 
+    // console.log('test', this.catalogSorter(data))
     // data = this.catalogSorter(data);
     
     return (
