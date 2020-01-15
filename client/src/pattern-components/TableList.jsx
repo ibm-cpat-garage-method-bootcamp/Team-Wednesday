@@ -14,7 +14,7 @@ import "./patterns.scss";
 
 class TableList extends Component {
   title = 'Catalog';
-  subtitle = 'This pattern will display and array of model objects in a multi column grid/table.';
+  subtitle = 'This list displays your frequently used items.';
 
   columns = ['Name', 'Size', 'Comments']; 
 
