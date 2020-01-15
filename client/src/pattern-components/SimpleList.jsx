@@ -19,7 +19,7 @@ class SimpleList extends Component {
       selectedRow: 0
     };
   }
-
+  columns = ["name", "amount"]
   onRowClick = id => {
     this.setState({ selectedRow: id });
   };
@@ -44,20 +44,25 @@ class SimpleList extends Component {
           </StructuredListCell>
         </div>
 
-        <StructuredListCell className="simple-list-row">
-          {row}
-        </StructuredListCell>
+        {this.columns.map((column)=>
+        <StructuredListCell className="simple-list-row" contentEditable="true">
+          {row[column]}
+        </StructuredListCell>)}
       </StructuredListRow>
     );
   };
 
   render() {
-    const data = ["row1", "row2", "row3"];
+    const items = [
+      { name: "bananas", amount: "5"},
+      { name: "milk", amount: "half gal"},
+      { name: "chicken", amount: "2 lbs"}
+    ];
     return (
       <div className="bx--grid pattern-container">
         <Header
           title="Simple List"
-          subtitle="This pattern will display an array of model objects in a simple list column list."
+          subtitle="List of items to buy"
         />
         <div className="bx--row">
           <div className="bx--col-xs-12">
@@ -66,15 +71,17 @@ class SimpleList extends Component {
                 <StructuredListRow head>
                   <StructuredListCell head />
                   <StructuredListCell head>
-                    Simple List Title
+                    Name
+                  </StructuredListCell>
+                  <StructuredListCell head>
+                    Amount
                   </StructuredListCell>
                 </StructuredListRow>
               </StructuredListHead>
 
               <StructuredListBody>
-                {data.map((row, i) => {
-                  return this.renderRow(row, i);
-                })}
+                {items.map((item,i) => 
+                  this.renderRow(item, i))}
               </StructuredListBody>
             </StructuredListWrapper>
           </div>
