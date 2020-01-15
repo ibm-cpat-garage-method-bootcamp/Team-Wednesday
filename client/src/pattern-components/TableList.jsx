@@ -100,8 +100,8 @@ class TableList extends Component {
   };
 
   render() {
-    const data = this.state.data; 
-    console.log('test', this.catalogSorter(data))
+    const data = this.catalogSorter(this.state.data); 
+    // console.log('test', this.catalogSorter(data))
     // data = this.catalogSorter(data);
     
     return (
