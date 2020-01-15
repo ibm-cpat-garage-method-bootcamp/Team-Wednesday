@@ -12,55 +12,12 @@ import { iconCheckmarkSolid } from "carbon-icons";
 import Header from "./Header";
 import "./patterns.scss";
 
-class TableList extends Component {
-  title = 'Catalog';
-  subtitle = 'This pattern will display and array of model objects in a multi column grid/table.';
-
-  columns = ['Name', 'Size', 'Comments']; 
-
-  formatters = {
-    'ZipCode': function(val) {
-      return val + '-0000';
-    }
-  };
-
-  data = [
-    {
-      Name: "Olives",
-      Size: "3.5 oz", 
-      Comments: "Pitted please. "
-    },
-    {
-      Name: "Bananas",
-      Size: "1 LB",
-      Comments: "Fresh Bananas! Want them to be green."
-    },
-    {
-      Name: "Coca-Cola",
-      Size: "12 Pack", 
-      Comments: ""
-    }
-  ]; 
-
-  catalogSorter(catalog) { 
-    if (Array.isArray(catalog)) { 
-      return catalog.sort((a, b) => (a.Name > b.Name) ? 1 : -1); 
-    }
-  }; 
-
+class SimpleList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
-      selectedRow: 0,
+      selectedRow: 0
     };
-  }
-
-  async componentDidMount() {
-
-    this.setState({
-      data: this.data,
-    })
   }
 
   onRowClick = id => {
@@ -86,29 +43,21 @@ class TableList extends Component {
             />
           </StructuredListCell>
         </div>
-        {this.columns.map(col => {
-          const format = this.formatters[col] || function(val) { return val; };
 
-          return (
-            <StructuredListCell key={col} className="simple-list-row">
-              {format(row[col])}
-            </StructuredListCell>
-          );
-        })}
+        <StructuredListCell className="simple-list-row">
+          {row}
+        </StructuredListCell>
       </StructuredListRow>
     );
   };
 
   render() {
-    const data = this.state.data; 
-    console.log('test', this.catalogSorter(data))
-    // data = this.catalogSorter(data);
-    
+    const data = ["row1", "row2", "row3"];
     return (
       <div className="bx--grid pattern-container">
         <Header
-          title={this.title}
-          subtitle={this.subtitle}
+          title="Simple List"
+          subtitle="This pattern will display an array of model objects in a simple list column list."
         />
         <div className="bx--row">
           <div className="bx--col-xs-12">
@@ -116,14 +65,9 @@ class TableList extends Component {
               <StructuredListHead>
                 <StructuredListRow head>
                   <StructuredListCell head />
-                  {this.columns.map(key => {
-                    return (
-                      <StructuredListCell head key={key}>
-                        {key.charAt(0).toUpperCase() +
-                          key.slice(1).replace(/([A-Z])/g, " $1")}
-                      </StructuredListCell>
-                    );
-                  })}
+                  <StructuredListCell head>
+                    Simple List Title
+                  </StructuredListCell>
                 </StructuredListRow>
               </StructuredListHead>
 
@@ -140,4 +84,4 @@ class TableList extends Component {
   }
 }
 
-export default TableList;
+export default SimpleList;

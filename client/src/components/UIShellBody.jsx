@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SimpleList from "../pattern-components/SimpleList";
-import BasicPage from "../pattern-components/BasicPage";
+import BasicPage from "../pattern-components/BasicPage"; 
+import Catalog from './Catalog';
 import "../pattern-components/patterns.scss";
 
 class UIShellBody extends Component {
@@ -16,6 +17,7 @@ class UIShellBody extends Component {
     return (
       <div className="pattern-container">
         <PatternName showDescription={true} />
+        <Catalog />
       </div>
     );
   }
