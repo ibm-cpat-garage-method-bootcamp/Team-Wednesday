@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import SimpleList from "../pattern-components/SimpleList";
-import BasicPage from "../pattern-components/BasicPage"; 
+// import BasicPage from "../pattern-components/BasicPage"; 
 import Catalog from './Catalog';
 import "../pattern-components/patterns.scss";
 
 class UIShellBody extends Component {
   components = {
     "Simple List": SimpleList,
-    "Basic Page": BasicPage
+    "Catalog": Catalog
   };
-  defaultComponent = "Basic Page";
+  defaultComponent = "Catalog";
 
   render() {
     let curScreen = this.defaultComponent;
@@ -17,7 +17,6 @@ class UIShellBody extends Component {
     return (
       <div className="pattern-container">
         <PatternName showDescription={true} />
-        <Catalog />
       </div>
     );
   }
