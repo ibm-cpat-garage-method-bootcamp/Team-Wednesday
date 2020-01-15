@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Header from "./Header";
 import "./patterns.scss";
 
 class BasicPage extends Component {
@@ -10,7 +9,7 @@ class BasicPage extends Component {
   render() {
     return (
       <div className="bx--grid pattern-container">
-        <Header title="Team Wednesday" subtitle="A basic grocery list app." />
+        
       </div>
     );
   }

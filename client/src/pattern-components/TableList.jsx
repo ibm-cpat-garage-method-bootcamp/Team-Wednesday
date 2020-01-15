@@ -14,7 +14,7 @@ import "./patterns.scss";
 
 class TableList extends Component {
   title = 'Catalog';
-  subtitle = 'This pattern will display and array of model objects in a multi column grid/table.';
+  subtitle = 'This is a list for items needed.';
 
   columns = ['Name', 'Size', 'Comments']; 
 
@@ -84,13 +84,13 @@ class TableList extends Component {
               className="bx--structured-list-svg"
               icon={iconCheckmarkSolid}
             />
-          </StructuredListCell>
+          </StructuredListCell >
         </div>
         {this.columns.map(col => {
           const format = this.formatters[col] || function(val) { return val; };
 
           return (
-            <StructuredListCell key={col} className="simple-list-row">
+            <StructuredListCell key={col} className="simple-list-row" contentEditable="true">
               {format(row[col])}
             </StructuredListCell>
           );

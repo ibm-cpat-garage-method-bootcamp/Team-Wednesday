@@ -19,12 +19,12 @@ class SimpleList extends Component {
       selectedRow: 0
     };
   }
-
+  
   onRowClick = id => {
     this.setState({ selectedRow: id });
   };
-
-  renderRow = (row, id) => {
+  columns = ["row", "column"]
+  renderRow = (columns, id) => {
     return (
       <StructuredListRow key={id} onClick={() => this.onRowClick(id)}>
         <div>
@@ -44,15 +44,15 @@ class SimpleList extends Component {
           </StructuredListCell>
         </div>
 
-        <StructuredListCell className="simple-list-row">
-          {row}
+        <StructuredListCell className="simple-list-row" contentEditable="true">
+          {columns}
         </StructuredListCell>
       </StructuredListRow>
     );
   };
 
   render() {
-    const data = ["row1", "row2", "row3"];
+    const items = ["row1", "row2", "row3"];
     return (
       <div className="bx--grid pattern-container">
         <Header
@@ -72,8 +72,8 @@ class SimpleList extends Component {
               </StructuredListHead>
 
               <StructuredListBody>
-                {data.map((row, i) => {
-                  return this.renderRow(row, i);
+                {items.map((item, i) => {
+                  return this.renderRow(item, i);
                 })}
               </StructuredListBody>
             </StructuredListWrapper>
