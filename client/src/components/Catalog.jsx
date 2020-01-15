@@ -1,5 +1,6 @@
 import React, { Component } from 'react'; 
 import TableList from '../pattern-components/TableList'; 
+import UpdateForm from '../pattern-components/UpdateForm'; 
 
 class Catalog extends Component { 
   constructor(props) { 
@@ -12,9 +13,8 @@ class Catalog extends Component {
   render() { 
     return ( 
       <div className="catalog-list"> 
-        <TableList> 
-          
-        </TableList>
+        <TableList /> 
+        <UpdateForm />
       </div>
     )
   };
