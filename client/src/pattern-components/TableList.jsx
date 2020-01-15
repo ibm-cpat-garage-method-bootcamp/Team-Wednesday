@@ -16,7 +16,7 @@ class TableList extends Component {
   title = 'Catalog';
   subtitle = 'This list displays your frequently used items.';
 
-  columns = ['Name', 'Size', 'Comments']; 
+  columns = ['Are We Out?', 'Name', 'Size', 'Comments']; 
 
   formatters = {
     'ZipCode': function(val) {
@@ -77,14 +77,11 @@ class TableList extends Component {
             title="row-0"
             name="row-0"
             //defaultChecked={this.state.selectedRow === id}
-            checked={this.state.selectedRow === id}
+            
           />
           <StructuredListCell>
-            <Icon
-              className="bx--structured-list-svg"
-              icon={iconCheckmarkSolid}
-            />
-          </StructuredListCell >
+            <input type="checkbox"></input>
+          </StructuredListCell>
         </div>
         {this.columns.map(col => {
           const format = this.formatters[col] || function(val) { return val; };
@@ -126,7 +123,7 @@ class TableList extends Component {
                   })}
                 </StructuredListRow>
               </StructuredListHead>
-
+              
               <StructuredListBody>
                 {data.map((row, i) => {
                   return this.renderRow(row, i);
