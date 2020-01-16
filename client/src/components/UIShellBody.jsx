@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SimpleList from "../pattern-components/SimpleList";
 // import BasicPage from "../pattern-components/BasicPage"; 
 import Catalog from './Catalog';
+import CreateReadUpdateDelete from '../pattern-components/CreateReadUpdateDelete'
 import "../pattern-components/patterns.scss";
 
 class UIShellBody extends Component { 
@@ -42,6 +43,7 @@ class UIShellBody extends Component {
     return (
       <div className="pattern-container">
         <PatternName showDescription={true} />
+        <CreateReadUpdateDelete/>
       </div>
     );
   }

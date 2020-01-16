@@ -12,6 +12,7 @@ import {
 import { iconCheckmarkSolid } from "carbon-icons";
 import Header from "./Header";
 import ValidatingForm from "./ValidatingForm";
+import Checkbox from './Checkbox' 
 import "./patterns.scss";
 
 class CreateReadUpdateDelete extends Component {
@@ -19,28 +20,28 @@ class CreateReadUpdateDelete extends Component {
     super(props);
     const data = [
       [
-        { label: "Name", value: "Lin", type: "textinput" },
-        { label: "Address", value: "123 Main Street", type: "textinput" },
-        { label: "City", value: "Austin", type: "textinput" },
-        { label: "State", value: ["TX"], type: "dropdown" },
-        { label: "ZipCode", value: "12345", type: "textinput" },
-        { label: "Country", value: ["United States"], type: "dropdown" }
+        { label: "Name", value: "Banana", type: "textinput" },
+        { label: "Amount", value: "5 lbs", type: "textinput" },
+        { label: "Comments", value: "Fresh Bananas! Want them to be green.", type: "textinput" },
+        { label: "Needed", value: false, type: "boolean" }
       ],
       [
-        { label: "Name", value: "Mak", type: "textinput" },
-        { label: "Address", value: "45 2nd Street", type: "textinput" },
-        { label: "City", value: "Austin", type: "textinput" },
-        { label: "State", value: ["TX"], type: "dropdown" },
-        { label: "ZipCode", value: "78766", type: "textinput" },
-        { label: "Country", value: ["United States"], type: "dropdown" }
+        { label: "Name", value: "Tortilla", type: "textinput" },
+        { label: "Amount", value: "20 ct", type: "textinput" },
+        { label: "Comments", value: "HEB brand ONLY", type: "textinput" },
+        { label: "Needed", value: false, type: "boolean" }
       ],
       [
-        { label: "Name", value: "Joe", type: "textinput" },
-        { label: "Address", value: "40 Down Street", type: "textinput" },
-        { label: "City", value: "San Francisco", type: "textinput" },
-        { label: "State", value: ["CA"], type: "dropdown" },
-        { label: "ZipCode", value: "90706", type: "textinput" },
-        { label: "Country", value: ["United States"], type: "dropdown" }
+        { label: "Name", value: "Flour", type: "textinput" },
+        { label: "Amount", value: "5 lbs", type: "textinput" },
+        { label: "Comments", value: "If it ain't flour, it's gonna be sour.", type: "textinput" },
+        { label: "Needed", value: false, type: "boolean" }
+      ],
+      [
+        { label: "Name", value: "Olives", type: "textinput" },
+        { label: "Amount", value: "3.4 oz", type: "textinput" },
+        { label: "Comments", value: "Pitted please. ", type: "textinput" },
+        { label: "Needed", value: false, type: "boolean" }
       ]
     ];
     this.state = {
@@ -49,6 +50,14 @@ class CreateReadUpdateDelete extends Component {
       adding: false
     };
   }
+
+  convertData = inputData => {
+    let output = {};
+    inputData.forEach(dataRow => {
+      output[dataRow.label] = dataRow.value;
+    });
+    return output;
+  };
 
   onRowClick = id => {
     this.setState({ selectedRow: id });
@@ -59,11 +68,8 @@ class CreateReadUpdateDelete extends Component {
     let selectedRow = this.state.data.length;
     data[selectedRow] = [
       { label: "Name", value: "Enter data below", type: "textinput" },
-      { label: "Address", value: "", type: "textinput" },
-      { label: "City", value: "", type: "textinput" },
-      { label: "State", value: [""], type: "dropdown" },
-      { label: "ZipCode", value: "", type: "textinput" },
-      { label: "Country", value: [""], type: "dropdown" }
+      { label: "Amount", value: "", type: "textinput" },
+      { label: "Comments", value: "", type: "textinput" }
     ];
     this.setState({ data, selectedRow, adding: true });
   };
@@ -81,11 +87,8 @@ class CreateReadUpdateDelete extends Component {
     let selectedRow = this.state.selectedRow;
     data[selectedRow] = [
       { label: "Name", value: newData.name, type: "textinput" },
-      { label: "Address", value: newData.address, type: "textinput" },
-      { label: "City", value: newData.city, type: "textinput" },
-      { label: "State", value: [newData.state], type: "dropdown" },
-      { label: "ZipCode", value: newData.zipCode, type: "textinput" },
-      { label: "Country", value: [newData.country], type: "dropdown" }
+      { label: "Amount", value: newData.amount, type: "textinput" },
+      { label: "Comments", value: newData.comments, type: "textinput" }
     ];
     this.setState({ data });
   };
@@ -107,11 +110,16 @@ class CreateReadUpdateDelete extends Component {
             checked={this.state.selectedRow === id}
           />
           <StructuredListCell>
-            <Icon
-              className="bx--structured-list-svg"
-              icon={iconCheckmarkSolid}
-            />
+            <Checkbox checked={this.state.data[id].Needed} onChange={() => {
+                const dataCopy = [...this.state.data];
+                const needed = dataCopy[id].find(a=>a.label==="Needed");
+                needed.value = !needed.value;
+                console.log('data copy',dataCopy);
+                // this.displayListFromCheckbox(dataCopy);
+                this.setState({data:dataCopy});
+              }}/>
           </StructuredListCell>
+          
         </div>
         {Object.keys(row).map(col => {
           return (
@@ -127,15 +135,14 @@ class CreateReadUpdateDelete extends Component {
   render() {
     const selectedRow = this.state.selectedRow;
     const data = this.state.data;
-    const columns = data.length
-      ? data[selectedRow].map(item => item.label)
+    const columns = data.length ? data[selectedRow].map(item => item.label)
       : [];
 
     return (
       <div className="bx--grid pattern-container">
         <Header
-          title="Create, Read, Update, Delete"
-          subtitle="This composite pattern is build from the Table List pattern and uses the Validating Form pattern for creating items, Update Form pattern for Update."
+          title="Catalog"
+          subtitle="Items"
         />
         <div className="bx--row">
           <div className="bx--col-xs-12">
@@ -158,6 +165,17 @@ class CreateReadUpdateDelete extends Component {
                   const values = row.map(item => item.value);
                   return this.renderRow(values, i);
                 })}
+              </StructuredListBody>
+              <StructuredListBody>
+                <StructuredListRow>
+                {
+                  this.state.data.filter(d=>d.find(d=>d.label==="Needed"&&d.value)).map((d)=>{
+                    return this.convertData(d)
+                  }).map(d=>(
+                     <p id="listText" style={{display:`block`}}>{d.Amount} of {d.Name}</p>
+                  ))
+                }
+                </StructuredListRow>
               </StructuredListBody>
             </StructuredListWrapper>
           </div>
