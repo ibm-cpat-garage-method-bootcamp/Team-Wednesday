@@ -16,23 +16,17 @@ class UpdateForm extends Component {
     super(props);
     this.state = {
       dataToSave: {},
-      name: "John Doe",
-      address: "123 Main Street",
-      city: "Anytown",
-      state: "TX",
-      zipCode: "12345",
-      country: "United States"
+      name: "",
+      size: "",
+      comments: "",
     };
   }
 
   componentDidMount() {
     let dataToSave = {
       name: this.state.name,
-      address: this.state.address,
-      city: this.state.city,
-      state: this.state.state,
-      zipCode: this.state.zipCode,
-      country: this.state.country
+      size: this.state.size,
+      comments: this.state.comments,
     };
     this.setState({ dataToSave });
   }
@@ -65,30 +59,30 @@ class UpdateForm extends Component {
       this.setState({ nameInvalid: true });
       checkFlag = false;
     }
-    if (!this.state.address) {
-      this.setState({ addressInvalid: true });
+    if (!this.state.size) {
+      this.setState({ sizeInvalid: true });
       checkFlag = false;
     }
-    if (!this.state.city) {
-      this.setState({ cityInvalid: true });
-      checkFlag = false;
-    }
-    if (!this.state.state) {
-      this.setState({ stateInvalid: true });
-      checkFlag = false;
-    }
-    if (
-      !this.state.zipCode ||
-      (this.state.country === "United States" &&
-        !/(^\d{5}$)|(^\d{5}-\d{4}$)/.test(this.state.zipCode))
-    ) {
-      this.setState({ zipCodeInvalid: true });
-      checkFlag = false;
-    }
-    if (!this.state.country) {
-      this.setState({ countryInvalid: true });
-      checkFlag = false;
-    }
+    // if (!this.state.comments) {
+    //   this.setState({ commentInvalid: true });
+    //   checkFlag = false;
+    // }
+    // if (!this.state.state) {
+    //   this.setState({ stateInvalid: true });
+    //   checkFlag = false;
+    // }
+    // if (
+    //   !this.state.zipCode ||
+    //   (this.state.country === "United States" &&
+    //     !/(^\d{5}$)|(^\d{5}-\d{4}$)/.test(this.state.zipCode))
+    // ) {
+    //   this.setState({ zipCodeInvalid: true });
+    //   checkFlag = false;
+    // }
+    // if (!this.state.country) {
+    //   this.setState({ countryInvalid: true });
+    //   checkFlag = false;
+    // }
     return checkFlag;
   };
 
@@ -97,11 +91,11 @@ class UpdateForm extends Component {
     if (this.checkForm()) {
       let dataToSave = {
         name: this.state.name,
-        address: this.state.address,
-        city: this.state.city,
-        state: this.state.state,
-        zipCode: this.state.zipCode,
-        country: this.state.country
+        size: this.state.size,
+        comments: this.state.comments,
+        // state: this.state.state,
+        // zipCode: this.state.zipCode,
+        // country: this.state.country
       };
       this.setState({ dataToSave });
     }
@@ -111,10 +105,10 @@ class UpdateForm extends Component {
     return (
       <div className="bx--grid pattern-container">
         <Header
-          title="Update Form"
-          subtitle="Update form is based on the Display
-            Form pattern but will display model data and then validate ready for
-            it to be updated."
+          title="Add to your list!"
+          // subtitle="Update form is based on the Display
+          //   Form pattern but will display model data and then validate ready for
+          //   it to be updated."
         />
         <div className="bx--row">
           <div className="bx--col-xs-12">
@@ -133,128 +127,27 @@ class UpdateForm extends Component {
                 <br />
                 <br />
                 <TextInput
-                  id="address"
-                  name="address"
-                  value={this.state.address || ""}
+                  id="item-size"
+                  name="size"
+                  value={this.state.size || ""}
                   onChange={this.saveData}
-                  labelText="Address"
+                  labelText="Size"
                   maxLength="200"
-                  invalid={this.state.addressInvalid}
-                  invalidText="Please enter an address.."
+                  invalid={this.state.sizeInvalid}
+                  invalidText="Please enter item size.."
                 />
                 <br />
                 <br />
                 <TextInput
-                  id="city"
-                  name="city"
-                  value={this.state.city || ""}
+                  id="item-comments"
+                  name="comments"
+                  value={this.state.comments || ""}
                   onChange={this.saveData}
-                  labelText="City"
+                  labelText="Comments"
                   maxLength="100"
-                  invalid={this.state.cityInvalid}
-                  invalidText="Please enter a city.."
+                  invalid={this.state.commentInvalid}
+                  invalidText="Please enter a comment.."
                 />
-                <br />
-                <br />
-                <p className="bx--label left-align">State</p>
-                <DropdownV2
-                  id="state"
-                  label="Select a state.."
-                  ariaLabel="Select a state.."
-                  items={[
-                    "AL",
-                    "AK",
-                    "AS",
-                    "AZ",
-                    "AR",
-                    "CA",
-                    "CO",
-                    "CT",
-                    "DE",
-                    "DC",
-                    "FM",
-                    "FL",
-                    "GA",
-                    "GU",
-                    "HI",
-                    "ID",
-                    "IL",
-                    "IN",
-                    "IA",
-                    "KS",
-                    "KY",
-                    "LA",
-                    "ME",
-                    "MH",
-                    "MD",
-                    "MA",
-                    "MI",
-                    "MN",
-                    "MS",
-                    "MO",
-                    "MT",
-                    "NE",
-                    "NV",
-                    "NH",
-                    "NJ",
-                    "NM",
-                    "NY",
-                    "NC",
-                    "ND",
-                    "MP",
-                    "OH",
-                    "OK",
-                    "OR",
-                    "PW",
-                    "PA",
-                    "PR",
-                    "RI",
-                    "SC",
-                    "SD",
-                    "TN",
-                    "TX",
-                    "UT",
-                    "VT",
-                    "VI",
-                    "VA",
-                    "WA",
-                    "WV",
-                    "WI",
-                    "WY",
-                    "Other"
-                  ]}
-                  selectedItem={this.state.state}
-                  onChange={this.saveDataDropdown1}
-                />
-                {this.state.stateInvalid && (
-                  <p className="dropdown-invalid">Please select a state..</p>
-                )}
-                <br />
-                <br />
-                <TextInput
-                  id="zipCode"
-                  name="zipCode"
-                  value={this.state.zipCode || ""}
-                  onChange={this.saveData}
-                  labelText="Zip Code"
-                  maxLength="20"
-                  invalid={this.state.zipCodeInvalid}
-                  invalidText="Please enter a valid zip code.."
-                />
-                <br />
-                <br />
-                <p className="bx--label left-align">Country</p>
-                <DropdownV2
-                  id="country"
-                  label="Select a country.."
-                  ariaLabel="Select a country.."
-                  items={["United States", "Other"]}
-                  selectedItem={this.state.country}
-                  onChange={this.saveDataDropdown2}
-                />
-                {this.state.countryInvalid && (
-                  <p className="dropdown-invalid">Please select a country..</p>
-                )}
                 <br />
                 <br />
                 <div className="left-align">
@@ -269,7 +162,7 @@ class UpdateForm extends Component {
         {Object.keys(this.state.dataToSave).length > 0 && (
           <div className="bx--row">
             <div className="bx--col-xs-12 left-align">
-              <Tile>
+              {/* <Tile>
                 {Object.keys(this.state.dataToSave).map(item => (
                   <p key={item}>
                     &nbsp;&nbsp;
@@ -281,7 +174,7 @@ class UpdateForm extends Component {
                     {this.state.dataToSave[item]}
                   </p>
                 ))}
-              </Tile>
+              </Tile> */}
               <br />
               <br />
             </div>

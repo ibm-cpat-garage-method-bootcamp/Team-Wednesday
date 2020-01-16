@@ -44,7 +44,7 @@ class DisplayForm extends Component {
                     return (
                       <div key={item.label} className="display-form-item">
                         <TextInput
-                          disabled
+                          enabled
                           id={item.label}
                           value={item.value}
                           labelText={
@@ -59,7 +59,7 @@ class DisplayForm extends Component {
                       <div key={item.label} className="display-form-item">
                         <p className="bx--label left-align">{item.label}</p>
                         <DropdownV2
-                          disabled
+                          enabled
                           id={item.label}
                           label={"Select a " + item.label.toLowerCase() + ".."}
                           items={item.value}
