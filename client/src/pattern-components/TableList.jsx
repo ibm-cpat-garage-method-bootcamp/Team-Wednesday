@@ -49,9 +49,21 @@ class TableList extends Component {
         },
         {
           Needed: false,
-          Name: "Coca-Cola",
-          Size: "12 Pack", 
+          Name: "Bread flour",
+          Size: "5 lbs", 
           Comments: ""
+        },
+        {
+          Needed: false,
+          Name: "Tortillas",
+          Size: "20 ct", 
+          Comments: ""
+        },
+        {
+          Needed: false,
+          Name: "Milk",
+          Size: "Half gal", 
+          Comments: "Promise Land"
         }
       ],
       selectedRow: 0,
@@ -69,16 +81,6 @@ class TableList extends Component {
     this.setState({ selectedRow: id });
   };
 
-  displayListFromCheckbox() {
-    let checkBox = document.getElementById("checkbox");
-    let displayList = document.getElementById("listText");
-
-    if (checkBox.checked === true){
-      displayList.style.display = "block";
-    } else {
-      displayList.style.display = "none";
-    }
-  };
 
   renderRow = (row, id) => {
     return (
@@ -97,6 +99,7 @@ class TableList extends Component {
                 const dataCopy = [...this.state.data];
                 dataCopy.splice(id,1,{...dataCopy[id], Needed:!dataCopy[id].Needed});
                 console.log('data copy',dataCopy);
+                // this.displayListFromCheckbox(dataCopy);
                 this.setState({data:dataCopy});
               }}/>
           </StructuredListCell>
@@ -144,7 +147,13 @@ class TableList extends Component {
                 })}
               </StructuredListBody>
               <StructuredListBody>
-                <p id="listText" style={{display:`none`}}>Hello World</p>
+                <StructuredListRow>
+                {
+                  this.state.data.filter(d=>d.Needed).map(d=>(
+                    <p id="listText" style={{display:`block`}}>{d.Size} of {d.Name}</p>
+                  ))
+                }
+                </StructuredListRow>
               </StructuredListBody>
             </StructuredListWrapper>
           </div>
