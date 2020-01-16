@@ -105,7 +105,7 @@ class TableList extends Component {
           const format = this.formatters[col] || function(val) { return val; };
 
           return (
-            <StructuredListCell key={col} className="simple-list-row" >
+            <StructuredListCell key={col} className="simple-list-row">
               {format(row[col])}
             </StructuredListCell>
           );
@@ -115,10 +115,6 @@ class TableList extends Component {
   };
 
   render() {
-    // const data = this.catalogSorter(this.state.data); 
-    // console.log('test', this.catalogSorter(data))
-    // data = this.catalogSorter(data);
-    
     return (
       <div className="bx--grid pattern-container">
         <Header
