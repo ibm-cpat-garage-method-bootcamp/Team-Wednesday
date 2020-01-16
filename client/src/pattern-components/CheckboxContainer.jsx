@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import defaultCatalog from '../components/DefaultCatalog';
 import Checkbox from './Checkbox';
 
 class CheckboxContainer extends React.Component {
@@ -15,18 +16,21 @@ class CheckboxContainer extends React.Component {
 
   handleChange(e) {
     const item = e.target.name;
+    console.log(item)
     const isChecked = e.target.checked;
+    console.log(isChecked)
     this.setState(prevState => ({ checkedItems: prevState.checkedItems.set(item, isChecked) }));
   }
 
   render() {
+    console.log(defaultCatalog[0].item.Name)
     return (
       <React.Fragment>
         {
-          this.data.map(item => (
-            <label key={item.key}>
-              {item.name}
-              <Checkbox name={item.name} checked={this.state.checkedItems.get(item.name)} onChange={this.handleChange} />
+          defaultCatalog.map(item => (
+            <label key={item.Name}>
+              <div style={{color: "red"}}>{item.Name}</div>
+              <Checkbox name={item.Name} checked={this.state.checkedItems.get(item.Name)} onChange={this.handleChange} />
             </label>
           ))
         }

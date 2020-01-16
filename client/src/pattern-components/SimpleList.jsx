@@ -36,12 +36,12 @@ class SimpleList extends Component {
             //defaultChecked={this.state.selectedRow === id}
             checked={this.state.selectedRow === id}
           />
-          <StructuredListCell>
+          {/* <StructuredListCell>
             <Icon
               className="bx--structured-list-svg"
               icon={iconCheckmarkSolid}
             />
-          </StructuredListCell>
+          </StructuredListCell> */}
         </div>
 
         <StructuredListCell className="simple-list-row" contentEditable="true">

@@ -5,11 +5,12 @@ import {
   StructuredListCell,
   StructuredListHead,
   StructuredListBody,
-  StructuredListInput
+  StructuredListInput,
+  // Checkbox
 } from "carbon-components-react";
 import Header from "./Header";
-import CheckboxContainer from "./CheckboxContainer";
 import "./patterns.scss";
+import Checkbox from './Checkbox' 
 
 class TableList extends Component {
   title = 'Catalog';
@@ -23,26 +24,6 @@ class TableList extends Component {
     }
   };
 
-  data = [
-    {
-      Needed: false,
-      Name: "Olives",
-      Size: "3.5 oz", 
-      Comments: "Pitted please. "
-    },
-    {
-      Needed: false,
-      Name: "Bananas",
-      Size: "1 LB",
-      Comments: "Fresh Bananas! Want them to be green."
-    },
-    {
-      Needed: false,
-      Name: "Coca-Cola",
-      Size: "12 Pack", 
-      Comments: ""
-    }
-  ]; 
 
   catalogSorter(catalog) { 
     if (Array.isArray(catalog)) { 
@@ -53,16 +34,35 @@ class TableList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
+      data: [
+        {
+          Needed: false,
+          Name: "Olives",
+          Size: "3.5 oz", 
+          Comments: "Pitted please. "
+        },
+        {
+          Needed: false,
+          Name: "Bananas",
+          Size: "1 LB",
+          Comments: "Fresh Bananas! Want them to be green."
+        },
+        {
+          Needed: false,
+          Name: "Coca-Cola",
+          Size: "12 Pack", 
+          Comments: ""
+        }
+      ],
       selectedRow: 0,
     };
   }
 
   async componentDidMount() {
 
-    this.setState({
-      data: this.data,
-    })
+    // this.setState({
+    //   data: this.data,
+    // })
   }
 
   onRowClick = id => {
@@ -83,7 +83,7 @@ class TableList extends Component {
   renderRow = (row, id) => {
     return (
       <StructuredListRow key={id} onClick={() => this.onRowClick(id)}>
-        <div>
+
           <StructuredListInput
             id={`row-${id}`}
             value="row-0"
@@ -93,14 +93,19 @@ class TableList extends Component {
             
           />
           <StructuredListCell>
-            <CheckboxContainer/>
+            <Checkbox checked={this.state.data[id].Needed} onChange={() => {
+                const dataCopy = [...this.state.data];
+                dataCopy.splice(id,1,{...dataCopy[id], Needed:!dataCopy[id].Needed});
+                console.log('data copy',dataCopy);
+                this.setState({data:dataCopy});
+              }}/>
           </StructuredListCell>
-        </div>
+      
         {this.columns.map(col => {
           const format = this.formatters[col] || function(val) { return val; };
 
           return (
-            <StructuredListCell key={col} className="simple-list-row" contentEditable="true">
+            <StructuredListCell key={col} className="simple-list-row" >
               {format(row[col])}
             </StructuredListCell>
           );
@@ -110,7 +115,7 @@ class TableList extends Component {
   };
 
   render() {
-    const data = this.catalogSorter(this.state.data); 
+    // const data = this.catalogSorter(this.state.data); 
     // console.log('test', this.catalogSorter(data))
     // data = this.catalogSorter(data);
     
@@ -138,7 +143,7 @@ class TableList extends Component {
               </StructuredListHead>
               
               <StructuredListBody>
-                {data.map((row, i) => {
+                {this.state.data.map((row, i) => {
                   return this.renderRow(row, i);
                 })}
               </StructuredListBody>
