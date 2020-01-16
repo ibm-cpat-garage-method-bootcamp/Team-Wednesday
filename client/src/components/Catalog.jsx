@@ -13,7 +13,7 @@ class Catalog extends Component {
   render() { 
     return ( 
       <div className="catalog-list"> 
-        <TableList /> 
+        <TableList  defaultCatalog={this.props.defaultCatalog}/> 
         <UpdateForm />
       </div>
     )

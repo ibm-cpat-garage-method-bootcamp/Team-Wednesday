@@ -24,23 +24,23 @@ class TableList extends Component {
     }
   };
 
-  data = [
-    {
-      Name: "Olives",
-      Size: "3.5 oz", 
-      Comments: "Pitted please. "
-    },
-    {
-      Name: "Bananas",
-      Size: "1 LB",
-      Comments: "Fresh Bananas! Want them to be green."
-    },
-    {
-      Name: "Coca-Cola",
-      Size: "12 Pack", 
-      Comments: ""
-    }
-  ]; 
+  // data = [
+  //   {
+  //     Name: "Olives",
+  //     Size: "3.5 oz", 
+  //     Comments: "Pitted please. "
+  //   },
+  //   {
+  //     Name: "Bananas",
+  //     Size: "1 LB",
+  //     Comments: "Fresh Bananas! Want them to be green."
+  //   },
+  //   {
+  //     Name: "Coca-Cola",
+  //     Size: "12 Pack", 
+  //     Comments: ""
+  //   }
+  // ]; 
 
   catalogSorter(catalog) { 
     if (Array.isArray(catalog)) { 
@@ -59,7 +59,7 @@ class TableList extends Component {
   async componentDidMount() {
 
     this.setState({
-      data: this.data,
+      data: this.state.data,
     })
   }
 
@@ -100,9 +100,10 @@ class TableList extends Component {
   };
 
   render() {
-    const data = this.catalogSorter(this.state.data); 
-    // console.log('test', this.catalogSorter(data))
-    // data = this.catalogSorter(data);
+    const data = this.catalogSorter(this.props.defaultCatalog); 
+    console.log(typeof this.props.defaultCatalog);
+    console.log('testing if prop has been passed down', this.props.defaultCatalog);
+    console.log('testing if prop is in alphabetical order', data); 
     
     return (
       <div className="bx--grid pattern-container">
@@ -128,7 +129,7 @@ class TableList extends Component {
               </StructuredListHead>
 
               <StructuredListBody>
-                {data.map((row, i) => {
+                {data && data.map((row, i) => {
                   return this.renderRow(row, i);
                 })}
               </StructuredListBody>
