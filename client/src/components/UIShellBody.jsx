@@ -4,7 +4,32 @@ import SimpleList from "../pattern-components/SimpleList";
 import Catalog from './Catalog';
 import "../pattern-components/patterns.scss";
 
-class UIShellBody extends Component {
+class UIShellBody extends Component { 
+  constructor(props) { 
+    super(props); 
+    this.state = { 
+      defaultCatalog: this.defaultCatalog
+    }
+  };  
+
+  defaultCatalog = [
+    {
+      Name: "Olives",
+      Size: "3.5 oz", 
+      Comments: "Pitted please. "
+    },
+    {
+      Name: "Bananas",
+      Size: "1 LB",
+      Comments: "Fresh Bananas! Want them to be green."
+    },
+    {
+      Name: "Coca-Cola",
+      Size: "12 Pack", 
+      Comments: ""
+    }
+  ]; 
+
   components = {
     "Simple List": SimpleList,
     "Catalog": Catalog
@@ -17,6 +42,7 @@ class UIShellBody extends Component {
     return (
       <div className="pattern-container">
         <PatternName showDescription={true} />
+        <Catalog defaultCatalog={this.state.defaultCatalog} />
       </div>
     );
   }
