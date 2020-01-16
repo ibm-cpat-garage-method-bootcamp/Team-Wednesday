@@ -9,10 +9,10 @@ class BasicPage extends Component {
   render() {
     return (
       <div className="bx--grid pattern-container">
-        
+
       </div>
     );
-  }
+  }gi
 }
 
 export default BasicPage;

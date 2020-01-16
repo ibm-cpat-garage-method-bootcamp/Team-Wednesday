@@ -5,11 +5,10 @@ import {
   StructuredListCell,
   StructuredListHead,
   StructuredListBody,
-  StructuredListInput,
-  Icon
+  StructuredListInput
 } from "carbon-components-react";
-import { iconCheckmarkSolid } from "carbon-icons";
 import Header from "./Header";
+import CheckboxContainer from "./CheckboxContainer";
 import "./patterns.scss";
 
 class TableList extends Component {
@@ -26,16 +25,19 @@ class TableList extends Component {
 
   data = [
     {
+      Needed: false,
       Name: "Olives",
       Size: "3.5 oz", 
       Comments: "Pitted please. "
     },
     {
+      Needed: false,
       Name: "Bananas",
       Size: "1 LB",
       Comments: "Fresh Bananas! Want them to be green."
     },
     {
+      Needed: false,
       Name: "Coca-Cola",
       Size: "12 Pack", 
       Comments: ""
@@ -67,6 +69,17 @@ class TableList extends Component {
     this.setState({ selectedRow: id });
   };
 
+  displayListFromCheckbox() {
+    let checkBox = document.getElementById("checkbox");
+    let displayList = document.getElementById("listText");
+
+    if (checkBox.checked === true){
+      displayList.style.display = "block";
+    } else {
+      displayList.style.display = "none";
+    }
+  };
+
   renderRow = (row, id) => {
     return (
       <StructuredListRow key={id} onClick={() => this.onRowClick(id)}>
@@ -80,7 +93,7 @@ class TableList extends Component {
             
           />
           <StructuredListCell>
-            <input type="checkbox"></input>
+            <CheckboxContainer/>
           </StructuredListCell>
         </div>
         {this.columns.map(col => {
@@ -128,6 +141,9 @@ class TableList extends Component {
                 {data.map((row, i) => {
                   return this.renderRow(row, i);
                 })}
+              </StructuredListBody>
+              <StructuredListBody>
+                <p id="listText" style={{display:`none`}}>Hello World</p>
               </StructuredListBody>
             </StructuredListWrapper>
           </div>
