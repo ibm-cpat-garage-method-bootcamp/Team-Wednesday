@@ -69,7 +69,8 @@ class CreateReadUpdateDelete extends Component {
     data[selectedRow] = [
       { label: "Name", value: "Enter data below", type: "textinput" },
       { label: "Amount", value: "", type: "textinput" },
-      { label: "Comments", value: "", type: "textinput" }
+      { label: "Comments", value: "", type: "textinput" },
+      { label: "Needed", value: false, type: "boolean" }
     ];
     this.setState({ data, selectedRow, adding: true });
   };

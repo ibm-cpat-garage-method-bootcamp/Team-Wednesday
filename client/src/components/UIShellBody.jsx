@@ -38,11 +38,10 @@ class UIShellBody extends Component {
   defaultComponent = "Catalog";
 
   render() {
-    let curScreen = this.defaultComponent;
-    const PatternName = this.components[curScreen];
+    
     return (
       <div className="pattern-container">
-        <PatternName showDescription={true} />
+        
         <CreateReadUpdateDelete/>
       </div>
     );
