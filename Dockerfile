@@ -1,17 +1,13 @@
-FROM registry.access.redhat.com/ubi8/nodejs-10
+FROM node:alpine 
 
-RUN mkdir app
+WORKDIR /app
 
-# Install npm production packages
-COPY --chown=default:root . ./app
+COPY ./client/package.json ./
 
-ENV NODE_ENV production
-ENV PORT 3000
+RUN npm install
 
-EXPOSE 3000/tcp
+COPY ./client ./
 
-WORKDIR ./app
-
-RUN npm install --production
+EXPOSE 3000
 
 CMD ["npm", "start"]
