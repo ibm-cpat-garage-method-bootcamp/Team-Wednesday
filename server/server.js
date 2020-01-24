@@ -21,6 +21,8 @@ const log4js = require("log4js");
 const localConfig = require("./config/local.json");
 const path = require("path");
 var cookieParser = require("cookie-parser");
+var Cloudant = require('@cloudant/cloudant'); 
+var cloudant = new Cloudant({ url: 'https://4aad4f5d-8720-4c20-ae98-ed054d17e6fc-bluemix.cloudantnosqldb.appdomain.cloud', plugins: { iamauth: { iamApiKey: 'WqHbZNFQyJDn9G7PM_4lxbzfu2UXPxYvW6veZ8SfBpCn' } } });
 
 const logger = log4js.getLogger(appName);
 const app = express();
@@ -40,6 +42,11 @@ require("./services/index")(app);
 require("./routers/index")(app, server);
 
 // Add your code here
+cloudant.db.list(function(err, body) {
+  body.forEach(function(db) {
+   console.log(db);
+   });
+  });  
 
 const port = process.env.PORT || localConfig.port;
 server.listen(port, function() {

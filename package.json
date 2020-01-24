@@ -30,6 +30,7 @@
   "author": "IBM Garage for Cloud",
   "license": "ISC",
   "dependencies": {
+    "@cloudant/cloudant": "^4.2.3",
     "body-parser": "^1.17.2",
     "carbon-components": "^10.9.1",
     "client": "file:./client",
