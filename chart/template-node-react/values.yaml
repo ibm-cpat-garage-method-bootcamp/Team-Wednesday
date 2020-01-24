@@ -28,7 +28,7 @@ ingress:
     requestType: web
     binding:
       name: ""
-      namespace: ""
+      namespace: "wednesday"
 
 #  host: hello
   namespaceInHost: true
