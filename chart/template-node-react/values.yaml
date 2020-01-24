@@ -8,8 +8,8 @@ replicaCount: 1
 apiHost: ""
 
 image:
-  repository: replace
-  tag: replace
+  repository: toddibm/team-wednesday
+  tag: latest
   pullPolicy: IfNotPresent
   port: 3000
 
